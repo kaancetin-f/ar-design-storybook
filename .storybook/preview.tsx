@@ -1,21 +1,21 @@
-// .storybook/preview.ts
-import type { Preview } from "@storybook/nextjs-vite";
+import type { Preview } from '@storybook/nextjs-vite'
 
 const preview: Preview = {
-  // globalTypes: {
-  //   locale: {
-  //     description: "Global dil seçeneği",
-  //     defaultValue: "en",
-  //     toolbar: {
-  //       icon: "globe",
-  //       items: [
-  //         { value: "tr", title: "Türkçe", right: "🇹🇷" },
-  //         { value: "en", title: "English", right: "🇬🇧" },
-  //       ],
-  //       dynamicTitle: true,
-  //     },
-  //   },
-  // },
+  parameters: {
+    controls: {
+      matchers: {
+       color: /(background|color)$/i,
+       date: /Date$/i,
+      },
+    },
+
+    a11y: {
+      // 'todo' - show a11y violations in the test UI only
+      // 'error' - fail CI on a11y violations
+      // 'off' - skip a11y checks entirely
+      test: 'todo'
+    }
+  },
 };
 
 export default preview;

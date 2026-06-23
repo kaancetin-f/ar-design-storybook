@@ -1,0 +1,55 @@
+import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+<Title />
+
+The Button component is an interactive element used to trigger an action or submit a form.
+Use buttons to enable users to take action with a single click.
+
+```typescript
+import { Button } from "@harjs/react-ui";
+```
+
+<h3>Variant</h3>
+
+Defines the visual hierarchy of the button (e.g., Filled, Outlined, Text). Choose the appropriate variant based on the
+importance of the action.
+
+<Canvas of={ButtonStories.Variant} />
+
+<h3>Error</h3>
+
+Represents the destructive/danger state. Used to emphasize critical or irreversible actions like deletion or cancellation.
+
+<Canvas of={ButtonStories.Error} />
+
+<h3>Size</h3>
+
+Adjusts the button dimensions (Small, Medium, Large) to scale appropriately across different page densities and viewport layouts.
+
+<Canvas of={ButtonStories.Size} />
+
+<h3>With Icon</h3>
+
+Allows adding an icon to the left or right of the button text to visually reinforce the action and improve scannability.
+
+<Canvas of={ButtonStories.WithIcon} />
+
+<h3>Full Width</h3>
+
+Forces the button to take up 100% width of its parent container. Ideal for mobile layouts and full-width forms.
+
+<Canvas of={ButtonStories.FullWidth} />
+
+<h3>Interactive Preview</h3>
+
+Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+
+<Canvas of={ButtonStories.Editor} />
+
+When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
+
+<Controls />
