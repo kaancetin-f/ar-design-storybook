@@ -84,7 +84,7 @@ export const Editor: StoryObj<StoryProps> = {
     children: "Button",
     variant: "filled",
     color: "blue",
-    size: "normal",
+    size: "md",
     upperCase: false,
     fullWidth: false,
     borderRadius: "sm",
@@ -140,14 +140,8 @@ export const Editor: StoryObj<StoryProps> = {
       name: "Icon",
       control: {
         type: "select",
-        labels: {
-          none: "None",
-          search: "Search",
-          check: "Check",
-          settings: "Settings",
-        },
       },
-      options: ["none", "search", "check", "settings"],
+      options: Object.keys(ICON_MAP),
       description: "Selects the sample `icon component` to be placed inside the button.",
       table: {
         category: "Ikon",
@@ -223,6 +217,8 @@ export const Editor: StoryObj<StoryProps> = {
 
     const selectedIcon = ICON_MAP[args.iconElement];
     const iconObj = selectedIcon ? { icon: { element: selectedIcon, position: args.iconPosition } } : {};
+
+    console.log(selectedIcon);
 
     return (
       <Button
@@ -412,15 +408,27 @@ export const Size: StoryObj<StoryProps> = {
     color: "blue",
   },
   render: ({ ...args }) => {
+    const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
+
     return (
       <>
-        <Button variant="filled" size="small" {...args}>
+        {sizes.map((size) => (
+          <Button variant="filled" size={size} {...args}>
+            Button {size}
+          </Button>
+        ))}
+      </>
+    );
+
+    return (
+      <>
+        <Button variant="filled" size="sm" {...args}>
           Small
         </Button>
-        <Button variant="filled" size="normal" {...args}>
+        <Button variant="filled" size="md" {...args}>
           Normal
         </Button>
-        <Button variant="filled" size="large" {...args}>
+        <Button variant="filled" size="lg" {...args}>
           Large
         </Button>
       </>
