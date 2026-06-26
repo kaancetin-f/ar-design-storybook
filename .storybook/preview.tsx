@@ -2,6 +2,9 @@ import type { Preview } from "@storybook/nextjs-vite";
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      defaultName: "Documentation",
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -67,16 +70,38 @@ const preview: Preview = {
       control: {
         type: "select",
         labels: {
-          small: "Small",
-          normal: "Normal",
-          large: "Large",
+          xs: "XS",
+          sm: "SM",
+          md: "MD",
+          lg: "LG",
+          xl: "XL",
+          xxl: "XXL",
         },
       },
-      options: ["small", "normal", "large"],
+      options: ["xs", "sm", "md", "lg", "xl", "xxl"],
       description: "Scaling the button's padding and font size.",
       table: {
         type: { summary: "string" },
-        defaultValue: { summary: "Normal" },
+        defaultValue: { summary: "SM" },
+      },
+    },
+    upperCase: {
+      name: "Upper Case",
+      control: { type: "boolean" },
+      description: "When enabled, automatically transforms all characters within the button text to `uppercase`.",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "False" },
+      },
+    },
+
+    disabled: {
+      name: "Disabled",
+      control: { type: "boolean" },
+      description: "When true, prevents user interaction and applies an inactive visual state to the entire component.",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "False" },
       },
     },
 
@@ -103,6 +128,31 @@ const preview: Preview = {
       },
     },
     // #endregion
+
+    // #region Validation
+    validationText: {
+      name: "Validation Text",
+      control: { type: "text" },
+      description:
+        "The helper or error message displayed below the component to provide feedback about the validation status.",
+      table: {
+        category: "Validation",
+        type: { summary: "strign" },
+        defaultValue: { summary: "" },
+      },
+    },
+    validationScrollTo: {
+      name: "Validation ScrollTo",
+      control: { type: "boolean" },
+      description: "When true, automatically scrolls the viewport to the component if a validation error occurs.",
+      table: {
+        category: "Validation",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "False" },
+      },
+    },
+    // #endregion
+    // Validation
   },
 };
 

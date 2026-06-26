@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Grid } from "@harjs/react-ui";
+import { Button, ButtonAction, ButtonGroup, Grid } from "@harjs/react-ui";
 import type { BorderRadiuses } from "@harjs/react-ui/types";
 
 type StoryProps = React.ComponentProps<typeof Button> & {
@@ -8,10 +8,22 @@ type StoryProps = React.ComponentProps<typeof Button> & {
   positionType: "fixed" | "absolute";
   iconElement: keyof typeof ICON_MAP;
   iconPosition: "start" | "end";
+  validationText?: string;
+  validationScrollTo?: string;
 };
 
 const ICON_MAP = {
   None: null,
+  NotePencil: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--orange-700)" viewBox="0 0 256 256">
+      <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,128v80a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h80a8,8,0,0,1,0,16H48V208H208V128a8,8,0,0,1,16,0Z"></path>
+    </svg>
+  ),
+  Trash: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--red-700)" viewBox="0 0 256 256">
+      <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
+    </svg>
+  ),
   Search: (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
       <path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"></path>
@@ -42,6 +54,11 @@ const ICON_MAP = {
       <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path>
     </svg>
   ),
+  CaretLineDown: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
+      <path d="M42.34,77.66A8,8,0,0,1,53.66,66.34L128,140.69l74.34-74.35a8,8,0,0,1,11.32,11.32l-80,80a8,8,0,0,1-11.32,0ZM208,184H48a8,8,0,0,0,0,16H208a8,8,0,0,0,0-16Z"></path>
+    </svg>
+  ),
 };
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
@@ -49,7 +66,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 const { Row, Column, Box } = Grid;
 
 const meta = {
-  title: "FORM/Buttons/Button",
+  title: "FORM/Button",
   component: Button,
   decorators: [
     (Story) => (
@@ -72,11 +89,14 @@ export const Editor: StoryObj<StoryProps> = {
     fullWidth: false,
     borderRadius: "sm",
     iconElement: "None",
+    disabled: false,
   },
   argTypes: {
     border: { table: { disable: true } },
     position: { table: { disable: true } },
     icon: { table: { disable: true } },
+    validationText: { table: { disable: true } },
+    validationScrollTo: { table: { disable: true } },
 
     children: {
       name: "Children",
@@ -88,15 +108,6 @@ export const Editor: StoryObj<StoryProps> = {
       },
     },
 
-    upperCase: {
-      name: "Upper Case",
-      control: { type: "boolean" },
-      description: "When enabled, automatically transforms all characters within the button text to `uppercase`.",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "False" },
-      },
-    },
     fullWidth: {
       name: "Full Width",
       control: { type: "boolean" },
@@ -270,236 +281,37 @@ export const Color: StoryObj<StoryProps> = {
     },
   },
   render: ({ ...args }) => {
+    const colors = [
+      "blue",
+      "purple",
+      "pink",
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "teal",
+      "cyan",
+      "gray",
+      "light",
+    ] as const;
+
+    const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed", "borderless"] as const;
+
     return (
-      <Row>
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="filled" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="filled" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="filled" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="filled" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="filled" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="filled" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="filled" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="filled" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="filled" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="filled" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="filled" color="light">
-              Light
-            </Button>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        {variants.map((variant) => (
+          <div key={variant} style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            {colors.map((color) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Button {...args} key={`${variant}-${color}`} variant={variant} color={color}>
+                  {color.charAt(0).toLocaleUpperCase()}
+                  {color.slice(1)}
+                </Button>
+              </div>
+            ))}
           </div>
-        </Column>
-
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="surface" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="surface" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="surface" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="surface" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="surface" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="surface" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="surface" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="surface" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="surface" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="surface" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="surface" color="light">
-              Light
-            </Button>
-          </div>
-        </Column>
-
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="surface-borderless" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="surface-borderless" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="surface-borderless" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="surface-borderless" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="surface-borderless" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="surface-borderless" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="surface-borderless" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="surface-borderless" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="surface-borderless" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="surface-borderless" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="surface-borderless" color="light">
-              Light
-            </Button>
-          </div>
-        </Column>
-
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="outlined" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="outlined" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="outlined" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="outlined" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="outlined" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="outlined" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="outlined" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="outlined" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="outlined" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="outlined" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="outlined" color="light">
-              Light
-            </Button>
-          </div>
-        </Column>
-
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="dashed" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="dashed" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="dashed" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="dashed" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="dashed" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="dashed" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="dashed" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="dashed" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="dashed" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="dashed" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="dashed" color="light">
-              Light
-            </Button>
-          </div>
-        </Column>
-
-        <Column>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <Button {...args} variant="borderless" color="red">
-              Red
-            </Button>
-            <Button {...args} variant="borderless" color="orange">
-              Orange
-            </Button>
-            <Button {...args} variant="borderless" color="yellow">
-              Yellow
-            </Button>
-            <Button {...args} variant="borderless" color="green">
-              Green
-            </Button>
-            <Button {...args} variant="borderless" color="teal">
-              Teal
-            </Button>
-            <Button {...args} variant="borderless" color="cyan">
-              Cyan
-            </Button>
-            <Button {...args} variant="borderless" color="blue">
-              Blue
-            </Button>
-            <Button {...args} variant="borderless" color="purple">
-              Purple
-            </Button>
-            <Button {...args} variant="borderless" color="pink">
-              Pink
-            </Button>
-            <Button {...args} variant="borderless" color="gray">
-              Gray
-            </Button>
-            <Button {...args} variant="borderless" color="light">
-              Light
-            </Button>
-          </div>
-        </Column>
-      </Row>
+        ))}
+      </div>
     );
   },
 };
@@ -602,16 +414,14 @@ export const Size: StoryObj<StoryProps> = {
   render: ({ ...args }) => {
     return (
       <>
-        <Button variant="filled" size="large" {...args}>
-          Large
+        <Button variant="filled" size="small" {...args}>
+          Small
         </Button>
-
         <Button variant="filled" size="normal" {...args}>
           Normal
         </Button>
-
-        <Button variant="filled" size="small" {...args}>
-          Small
+        <Button variant="filled" size="large" {...args}>
+          Large
         </Button>
       </>
     );
@@ -635,40 +445,16 @@ export const WithIcon: StoryObj<StoryProps> = {
         <Button color="green" icon={{ element: ICON_MAP.Check }} {...args}>
           Append
         </Button>
-
         <Button color="orange" icon={{ element: ICON_MAP.PaperPlaneRight, position: "end" }} {...args}>
           Send
         </Button>
-
         <Button color="blue" shape="square" icon={{ element: ICON_MAP.Search }} {...args}>
           {args.children}
         </Button>
-
         <Button color="blue" shape="circle" icon={{ element: ICON_MAP.Settings }} {...args}>
           {args.children}
         </Button>
       </>
-    );
-  },
-};
-
-export const FullWidth: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  args: {
-    name: "Full Width",
-    children: "Button",
-    variant: "filled",
-    color: "blue",
-  },
-  render: ({ ...args }) => {
-    return (
-      <Button {...args} fullWidth>
-        Append
-      </Button>
     );
   },
 };
@@ -691,6 +477,52 @@ export const Group: StoryObj<StoryProps> = {
         <Button color="orange">Save as Draft</Button>
         <Button color="light">Cancel</Button>
       </ButtonGroup>
+    );
+  },
+};
+
+export const Action: StoryObj<StoryProps> = {
+  name: "Button Action",
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+  args: {
+    color: "blue",
+  },
+  render: ({ ...args }) => {
+    return (
+      <>
+        <ButtonAction
+          {...args}
+          title="Dropdown"
+          variant="filled"
+          _color="blue"
+          _icon={{ element: ICON_MAP.CaretLineDown }}
+        >
+          <Button>Menu Link 1</Button>
+          <Button>Menu Link 2</Button>
+        </ButtonAction>
+
+        <ButtonAction {...args} title="Process" variant="outlined" _color="blue">
+          <Button color="orange" icon={{ element: ICON_MAP.NotePencil }}>
+            Edit
+          </Button>
+          <Button variant="filled" color="red" icon={{ element: ICON_MAP.Trash }}>
+            Delete
+          </Button>
+        </ButtonAction>
+
+        <ButtonAction {...args} variant="outlined" _color="blue">
+          <Button color="orange" icon={{ element: ICON_MAP.NotePencil }}>
+            Edit
+          </Button>
+          <Button variant="filled" color="red" icon={{ element: ICON_MAP.Trash }}>
+            Delete
+          </Button>
+        </ButtonAction>
+      </>
     );
   },
 };

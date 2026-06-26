@@ -22,8 +22,6 @@ importance of the action.
 
 <h3>Color</h3>
 
-Defines the theme color palette for the button. Supports brand colors (Primary, Secondary) or status colors (Success, Warning).
-
 <Canvas of={ButtonStories.Color} />
 
 <h3>Error</h3>
@@ -52,17 +50,25 @@ Allows adding an icon to the left or right of the button text to visually reinfo
 
 <Canvas of={ButtonStories.WithIcon} />
 
-<h3>Full Width</h3>
-
-Forces the button to take up 100% width of its parent container. Ideal for mobile layouts and full-width forms.
-
-<Canvas of={ButtonStories.FullWidth} />
-
 <h3>Group</h3>
 
 Use the `ButtonGroup` component to group multiple buttons into a single container. This component automatically passes shared properties down to all inner buttons, ensuring UI consistency with less code.
 
+```tsx
+import { ButtonGroup } from "@harjs/react-ui";
+```
+
 <Canvas of={ButtonStories.Group} />
+
+<h3>Action</h3>
+
+The ButtonAction component is used to group multiple action buttons under a single dropdown menu (panel). When a trigger button, such as three dots (...), is pressed, it lists the buttons in the sub-panel. This component automatically passes shared properties to all buttons within it, providing a consistent user interface (UI) with less code.
+
+```tsx
+import { ButtonAction } from "@harjs/react-ui";
+```
+
+<Canvas of={ButtonStories.Action} />
 
 <h3>Interactive Preview</h3>
 

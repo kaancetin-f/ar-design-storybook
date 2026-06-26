@@ -1,0 +1,67 @@
+import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+
+import * as CheckboxStories from "./Checkbox.stories";
+
+<Meta of={CheckboxStories} />
+
+<Title />
+
+The Checkbox component is an interactive element used to select one or more options from a limited set. Use checkboxes to allow users to toggle independent choices or agree to single statements.
+
+### Key Features
+
+- **Multiple Selection:** Enables users to select multiple independent options from a list.
+- **Binary State:** Ideal for single binary choices, such as "I agree to the terms and conditions."
+- **Instant Feedback:** Can be used in filtering systems to update data dynamically upon selection.
+
+> **Note:** Use Checkboxes when multiple options can be selected simultaneously. If the user must choose only _one_ option from a list, use a **Radio Button** instead.
+
+```typescript
+import { Checkbox } from "@harjs/react-ui";
+```
+
+<h3>Variant</h3>
+
+Defines the visual style and structure of the checkbox (e.g., Filled, Outlined). Choose the appropriate variant to match your application's design language and layout contrast.
+
+<Canvas of={CheckboxStories.Variant} />
+
+<h3>Color</h3>
+
+Specifies the semantic context or brand identity of the checkbox. Use different colors to convey specific meanings, such as status indicators or highlighted choices.
+
+<Canvas of={CheckboxStories.Color} />
+
+<h3>Disabled</h3>
+
+Prevents any user interaction while visually indicating that the checkbox is currently inactive. This is useful for conditional forms where certain choices depend on other fields.
+
+<Canvas of={CheckboxStories.Disabled} />
+
+<h3>Radius</h3>
+
+Controls the border-radius of the checkbox frame. Allows you to switch between sharp corners, subtle rounded edges, or fully circular states to align with your design system.
+
+<Canvas of={CheckboxStories.Radius} />
+
+<h3>Size</h3>
+
+Adjusts the scaling of the checkbox icon and its touch-target area. Provides options ranging from compact layouts (`xs`) to high-visibility configurations (`xxl`).
+
+<Canvas of={CheckboxStories.Size} />
+
+<h3>Validation</h3>
+
+Displays feedback states such as error messages or success markers. When a validation rule fails, the component visually adapts to draw the user's attention to the required correction.
+
+<Canvas of={CheckboxStories.Validation} />
+
+<h3>Interactive Preview</h3>
+
+Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+
+<Canvas of={CheckboxStories.Editor} />
+
+When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
+
+<Controls />
