@@ -555,6 +555,41 @@ export const Disabled: StoryObj<StoryProps> = {
   },
 };
 
+export const Radius: StoryObj<StoryProps> = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+  args: {
+    color: "blue",
+  },
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Button border={{ radius: "none" }} {...args}>
+          Radius none
+        </Button>
+        <Button border={{ radius: "sm" }} {...args}>
+          Radius sm
+        </Button>
+        <Button border={{ radius: "lg" }} {...args}>
+          Radius lg
+        </Button>
+        <Button border={{ radius: "xl" }} {...args}>
+          Radius xl
+        </Button>
+        <Button border={{ radius: "xxl" }} {...args}>
+          Radius xxl
+        </Button>
+        <Button border={{ radius: "pill" }} {...args}>
+          Radius pill
+        </Button>
+      </>
+    );
+  },
+};
+
 export const Size: StoryObj<StoryProps> = {
   parameters: {
     controls: {

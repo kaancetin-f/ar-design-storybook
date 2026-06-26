@@ -36,6 +36,10 @@ Represents the destructive/danger state. Used to emphasize critical or irreversi
 
 <Canvas of={ButtonStories.Disabled} />
 
+<h3>Radius</h3>
+
+<Canvas of={ButtonStories.Radius} />
+
 <h3>Size</h3>
 
 Adjusts the button dimensions (Small, Medium, Large) to scale appropriately across different page densities and viewport layouts.
@@ -54,10 +58,9 @@ Forces the button to take up 100% width of its parent container. Ideal for mobil
 
 <Canvas of={ButtonStories.FullWidth} />
 
-<h3>Button Group</h3>
+<h3>Group</h3>
 
-Use the ButtonGroup component to group buttons together. This component allows you pass common recipe properties to
-inner buttons.
+Use the `ButtonGroup` component to group multiple buttons into a single container. This component automatically passes shared properties down to all inner buttons, ensuring UI consistency with less code.
 
 <Canvas of={ButtonStories.Group} />
 
