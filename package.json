@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "nvm use v26.3.0 && storybook build"
   },
   "dependencies": {
     "@harjs/react-ui": "file:../harjs-design-react-ui",

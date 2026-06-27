@@ -1,0 +1,61 @@
+import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+
+import * as RadioStories from "./Radio.stories";
+
+<Meta of={RadioStories} />
+
+<Title />
+
+The Radio component is an interactive element used when users must select a single option from a predefined set. Radio buttons ensure that only one choice can be active at a time within the same group.
+
+### Key Features
+
+- **Single Selection:** Allows users to select only one option from a group.
+- **Mutually Exclusive Choices:** Automatically deselects the previously selected option when a new one is chosen.
+- **Clear Decision Making:** Ideal for forms and settings where exactly one option must be selected.
+
+> **Note:** Use Radio Buttons when users must choose **only one** option from a list. If multiple options can be selected independently, use a **Checkbox** instead.
+
+```typescript
+import { Radio, RadioGroup } from "@harjs/react-ui";
+```
+
+<h3>Variant</h3>
+
+Defines the visual style and structure of the radio button (e.g., Filled, Outlined). Choose the appropriate variant to match your application's design language and maintain visual consistency.
+
+<Canvas of={RadioStories.Variant} />
+
+<h3>Color</h3>
+
+Specifies the semantic context or brand identity of the radio button. Different colors can be used to emphasize selections or align with your application's theme.
+
+<Canvas of={RadioStories.Color} />
+
+<h3>Disabled</h3>
+
+Prevents user interaction while clearly indicating that the radio option is unavailable. Useful for conditional forms or temporarily inaccessible choices.
+
+<Canvas of={RadioStories.Disabled} />
+
+<h3>Size</h3>
+
+Adjusts the size of the radio button and its interactive area. Choose from compact (`xs`) to larger (`xxl`) sizes depending on accessibility and layout requirements.
+
+<Canvas of={RadioStories.Size} />
+
+<h3>Validation</h3>
+
+Displays validation feedback such as error or success states. Useful for required selections or form validation scenarios where a choice must be made.
+
+<Canvas of={RadioStories.Validation} />
+
+<h3>Interactive Preview</h3>
+
+Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+
+<Canvas of={RadioStories.Editor} />
+
+When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
+
+<Controls />

@@ -63,7 +63,7 @@ const ICON_MAP = {
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const { Row, Column, Box } = Grid;
+const { Box } = Grid;
 
 const meta = {
   title: "FORM/Button",
