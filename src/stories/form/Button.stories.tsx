@@ -481,9 +481,11 @@ export const Group: StoryObj<StoryProps> = {
   render: ({ ...args }) => {
     return (
       <ButtonGroup {...args}>
-        <Button>Save</Button>
-        <Button color="orange">Save as Draft</Button>
-        <Button color="light">Cancel</Button>
+        <Button variant="filled">Save</Button>
+        <Button color="gray">Save as Draft</Button>
+        <Button variant="borderless" color="red">
+          Cancel
+        </Button>
       </ButtonGroup>
     );
   },
