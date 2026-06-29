@@ -1,0 +1,52 @@
+import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+
+import * as InputStories from "./Input.stories";
+
+<Meta of={InputStories} />
+
+<Title />
+
+The Input component is a form element used to collect user-entered data.
+Use inputs to allow users to enter, edit, and submit text or other values.
+
+```typescript
+import { Input } from "@harjs/react-ui";
+```
+
+<h3>Variant</h3>
+
+<Canvas of={InputStories.Variant} />
+
+<h3>Color</h3>
+
+<Canvas of={InputStories.Color} />
+
+<h3>Disabled</h3>
+
+<Canvas of={InputStories.Disabled} />
+
+<h3>Radius</h3>
+
+<Canvas of={InputStories.Radius} />
+
+<h3>Size</h3>
+
+<Canvas of={InputStories.Size} />
+
+<h3>With Icon</h3>
+
+<Canvas of={InputStories.WithIcon} />
+
+<h3>Addons</h3>
+
+<Canvas of={InputStories.Addons} />
+
+<h3>Interactive Preview</h3>
+
+Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+
+<Canvas of={InputStories.Editor} />
+
+When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
+
+<Controls />

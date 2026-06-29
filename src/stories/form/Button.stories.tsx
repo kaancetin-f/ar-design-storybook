@@ -1,3 +1,4 @@
+import ICON_MAP from "@/infrustructure/shared/IconMap";
 import { Button, ButtonAction, ButtonGroup, Grid } from "@harjs/react-ui";
 import type { BorderRadiuses } from "@harjs/react-ui/types";
 
@@ -6,59 +7,10 @@ type StoryProps = React.ComponentProps<typeof Button> & {
   shape?: ["circle"] | ["square"] | [];
   positionInset: ("top" | "bottom" | "left" | "right")[];
   positionType: "fixed" | "absolute";
-  iconElement: keyof typeof ICON_MAP;
+  iconElement: keyof ReturnType<typeof ICON_MAP>;
   iconPosition: "start" | "end";
   validationText?: string;
   validationScrollTo?: string;
-};
-
-const ICON_MAP = {
-  None: null,
-  NotePencil: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--orange-700)" viewBox="0 0 256 256">
-      <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,128v80a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h80a8,8,0,0,1,0,16H48V208H208V128a8,8,0,0,1,16,0Z"></path>
-    </svg>
-  ),
-  Trash: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--red-700)" viewBox="0 0 256 256">
-      <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-    </svg>
-  ),
-  Search: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
-      <path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"></path>
-      <path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-    </svg>
-  ),
-  Check: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
-      <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"></path>
-    </svg>
-  ),
-  Settings: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
-      <path
-        d="M207.86,123.18l16.78-21a99.14,99.14,0,0,0-10.07-24.29l-26.7-3a81,81,0,0,0-6.81-6.81l-3-26.71a99.43,99.43,0,0,0-24.3-10l-21,16.77a81.59,81.59,0,0,0-9.64,0l-21-16.78A99.14,99.14,0,0,0,77.91,41.43l-3,26.7a81,81,0,0,0-6.81,6.81l-26.71,3a99.43,99.43,0,0,0-10,24.3l16.77,21a81.59,81.59,0,0,0,0,9.64l-16.78,21a99.14,99.14,0,0,0,10.07,24.29l26.7,3a81,81,0,0,0,6.81,6.81l3,26.71a99.43,99.43,0,0,0,24.3,10l21-16.77a81.59,81.59,0,0,0,9.64,0l21,16.78a99.14,99.14,0,0,0,24.29-10.07l3-26.7a81,81,0,0,0,6.81-6.81l26.71-3a99.43,99.43,0,0,0,10-24.3l-16.77-21A81.59,81.59,0,0,0,207.86,123.18ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z"
-        opacity="0.2"
-      ></path>
-      <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.6,107.6,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.29,107.29,0,0,0-26.25-10.86,8,8,0,0,0-7.06,1.48L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.6,107.6,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8.06,8.06,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8.06,8.06,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path>
-    </svg>
-  ),
-  // YENİ EKLENEN SAĞ OK İKONU
-  PaperPlaneRight: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
-      <path
-        d="M227.91,134.86,59.93,231a8,8,0,0,1-11.44-9.67L80,128,48.49,34.72a8,8,0,0,1,11.44-9.67l168,95.85A8,8,0,0,1,227.91,134.86Z"
-        opacity="0.2"
-      ></path>
-      <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path>
-    </svg>
-  ),
-  CaretLineDown: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 256 256">
-      <path d="M42.34,77.66A8,8,0,0,1,53.66,66.34L128,140.69l74.34-74.35a8,8,0,0,1,11.32,11.32l-80,80a8,8,0,0,1-11.32,0ZM208,184H48a8,8,0,0,0,0,16H208a8,8,0,0,0,0-16Z"></path>
-    </svg>
-  ),
 };
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
@@ -215,10 +167,8 @@ export const Editor: StoryObj<StoryProps> = {
     const hasPosition = (Array.isArray(args.positionInset) && args.positionInset.length > 0) || args.positionType;
     const positionObj = hasPosition ? { position: { inset: args.positionInset, type: args.positionType } } : {};
 
-    const selectedIcon = ICON_MAP[args.iconElement];
-    const iconObj = selectedIcon ? { icon: { element: selectedIcon, position: args.iconPosition } } : {};
-
-    console.log(selectedIcon);
+    // const selectedIcon = ICON_MAP("var(--white)")[args.iconElement];
+    // const iconObj = selectedIcon ? { icon: { element: selectedIcon, position: args.iconPosition } } : {};
 
     return (
       <Button
@@ -227,7 +177,7 @@ export const Editor: StoryObj<StoryProps> = {
         shape={finalShape as any}
         border={{ radius: args.borderRadius as any }}
         {...positionObj}
-        {...iconObj}
+        // {...iconObj}
       >
         {args.children}
       </Button>
@@ -436,6 +386,10 @@ export const Size: StoryObj<StoryProps> = {
   },
 };
 
+const check = ICON_MAP("var(--white)").Check;
+const paperPlaneRight = ICON_MAP("var(--white)").PaperPlaneRight;
+const search = ICON_MAP("var(--white)").Search;
+const settings = ICON_MAP("var(--white)").Settings;
 export const WithIcon: StoryObj<StoryProps> = {
   parameters: {
     controls: {
@@ -450,16 +404,16 @@ export const WithIcon: StoryObj<StoryProps> = {
   render: ({ ...args }) => {
     return (
       <>
-        <Button color="green" icon={{ element: ICON_MAP.Check }} {...args}>
+        <Button color="green" icon={{ element: check }} {...args}>
           Append
         </Button>
-        <Button color="orange" icon={{ element: ICON_MAP.PaperPlaneRight, position: "end" }} {...args}>
+        <Button color="orange" icon={{ element: paperPlaneRight, position: "end" }} {...args}>
           Send
         </Button>
-        <Button color="blue" shape="square" icon={{ element: ICON_MAP.Search }} {...args}>
+        <Button color="blue" shape="square" icon={{ element: search }} {...args}>
           {args.children}
         </Button>
-        <Button color="blue" shape="circle" icon={{ element: ICON_MAP.Settings }} {...args}>
+        <Button color="blue" shape="circle" icon={{ element: settings }} {...args}>
           {args.children}
         </Button>
       </>
@@ -491,6 +445,9 @@ export const Group: StoryObj<StoryProps> = {
   },
 };
 
+const caretLineDown = ICON_MAP("var(--white)").CaretLineDown;
+const notePencil = ICON_MAP("var(--white)").NotePencil;
+const trash = ICON_MAP("var(--white)").Trash;
 export const Action: StoryObj<StoryProps> = {
   name: "Button Action",
   parameters: {
@@ -504,31 +461,25 @@ export const Action: StoryObj<StoryProps> = {
   render: ({ ...args }) => {
     return (
       <>
-        <ButtonAction
-          {...args}
-          title="Dropdown"
-          variant="filled"
-          _color="blue"
-          _icon={{ element: ICON_MAP.CaretLineDown }}
-        >
+        <ButtonAction {...args} title="Dropdown" variant="filled" _color="blue" _icon={{ element: caretLineDown }}>
           <Button>Menu Link 1</Button>
           <Button>Menu Link 2</Button>
         </ButtonAction>
 
         <ButtonAction {...args} title="Process" variant="outlined" _color="blue">
-          <Button color="orange" icon={{ element: ICON_MAP.NotePencil }}>
+          <Button color="orange" icon={{ element: notePencil }}>
             Edit
           </Button>
-          <Button variant="filled" color="red" icon={{ element: ICON_MAP.Trash }}>
+          <Button variant="filled" color="red" icon={{ element: trash }}>
             Delete
           </Button>
         </ButtonAction>
 
         <ButtonAction {...args} variant="outlined" _color="blue">
-          <Button color="orange" icon={{ element: ICON_MAP.NotePencil }}>
+          <Button color="orange" icon={{ element: notePencil }}>
             Edit
           </Button>
-          <Button variant="filled" color="red" icon={{ element: ICON_MAP.Trash }}>
+          <Button variant="filled" color="red" icon={{ element: trash }}>
             Delete
           </Button>
         </ButtonAction>
