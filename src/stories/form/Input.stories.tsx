@@ -137,7 +137,7 @@ export const Size: Story = {
   render: (args) => (
     <Flex flexDirection="column" gap="15px">
       {SIZE_OPTIONS.map((size) => (
-        <Input key={size} {...args} size={size} placeholder={`Input ${size}`} />
+        <Input key={size} {...args} size={size} placeholder={`Size ${size}`} />
       ))}
     </Flex>
   ),
