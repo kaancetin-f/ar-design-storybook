@@ -1,4 +1,4 @@
-import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, Story, Controls, ArgTypes, Description, Title, Subtitle } from "@storybook/addon-docs/blocks";
 
 import * as ButtonStories from "./Button.stories";
 
@@ -6,53 +6,96 @@ import * as ButtonStories from "./Button.stories";
 
 <Title />
 
-The Button component is an interactive element used to trigger an action or submit a form.
-Use buttons to enable users to take action with a single click.
+`Button` is the core interactive component used to trigger an action or submit a form. It
+comes with multiple color, variant, size, and border radius options, and it supports icons
+so you can reinforce the action visually. For grouped or layered actions, it also pairs with
+`ButtonGroup` and `ButtonAction` to keep multiple buttons consistent with less code.
 
 ```typescript
 import { Button } from "@harjs/react-ui";
 ```
 
-<h3>Variant</h3>
+> **Note:** All examples below are live — you can use Storybook's Controls panel to change
+> props and instantly test the component's behavior.
 
-Defines the visual hierarchy of the button (e.g., Filled, Outlined, Text). Choose the appropriate variant based on the
-importance of the action.
+---
+
+## Variant
+
+`Button` offers several visual variants, each carrying a different level of emphasis. More
+prominent variants are best reserved for the primary action on a page, while softer or
+text-only variants suit secondary or tertiary actions that shouldn't compete for attention.
+Choosing the right variant for each action helps establish a clear visual hierarchy and
+guides the user toward the next step. For consistency, it's recommended to keep variant
+usage predictable across similar contexts (e.g. always using the same variant for
+"cancel" actions).
 
 <Canvas of={ButtonStories.Variant} />
 
-<h3>Color</h3>
+## Color
+
+The component supports a wide range of color options so it can align with your brand
+palette. Color is one of the strongest visual cues a button can carry, so it should be used
+intentionally — reserving certain colors for primary or recurring actions, and others for
+context-specific meaning, helps users build a mental model of what each color represents
+across the product.
 
 <Canvas of={ButtonStories.Color} />
 
-<h3>Error</h3>
+## Error
 
-Represents the destructive/danger state. Used to emphasize critical or irreversible actions like deletion or cancellation.
+A dedicated error state is available to represent destructive or irreversible actions, such
+as deleting a record or canceling a process that can't be undone. Using this state
+consistently helps users pause and reconsider before triggering an action they can't easily
+reverse.
 
 <Canvas of={ButtonStories.Error} />
 
-<h3>Disabled</h3>
+## Disabled
+
+When the `disabled` prop is set to `true`, the button is closed off to user interaction,
+visually dimmed, and the cursor switches to `not-allowed`. This state is used when an action
+isn't currently available — for example, while a required field is empty or a previous step
+hasn't been completed yet. For accessibility, `disabled` buttons are also automatically
+skipped by screen readers.
 
 <Canvas of={ButtonStories.Disabled} />
 
-<h3>Radius</h3>
+## Border Radius
+
+Corner rounding can be customized across a wide range of options and is an important visual
+variable that determines the overall "hard/soft" feel of your design system. Sharper,
+square corners tend to read as more structured and corporate, while fully rounded (pill-
+shaped) corners feel friendlier and more modern. For consistency across the project, it's
+generally recommended to use a single border radius value across all buttons.
 
 <Canvas of={ButtonStories.Radius} />
 
-<h3>Size</h3>
+## Size
 
-Adjusts the button dimensions (Small, Medium, Large) to scale appropriately across different page densities and viewport layouts.
+The component offers multiple height options that can be chosen based on context. Smaller
+sizes are preferred for compact contexts like toolbars or inline actions, mid-range sizes
+serve as the default for standard forms and pages, and larger sizes are used on mobile or
+for calls-to-action that need to stand out and draw attention.
 
 <Canvas of={ButtonStories.Size} />
 
-<h3>With Icon</h3>
+## With Icon
 
-Allows adding an icon to the left or right of the button text to visually reinforce the action and improve scannability.
+An icon can be placed at the start or end of the button label to visually reinforce the
+action and improve scannability — for example, a trash icon next to a delete action, or an
+arrow next to a "next step" action. This is especially useful in dense interfaces where
+quick visual recognition matters as much as the label text itself.
 
 <Canvas of={ButtonStories.WithIcon} />
 
-<h3>Group</h3>
+## Group
 
-Use the `ButtonGroup` component to group multiple buttons into a single container. This component automatically passes shared properties down to all inner buttons, ensuring UI consistency with less code.
+`ButtonGroup` lets you combine multiple buttons into a single visual container, merging
+their borders and spacing automatically so they read as one cohesive control rather than a
+row of separate elements. Shared properties are passed down to all inner buttons
+automatically, which keeps the UI consistent with less code — useful for things like
+segmented controls or a set of related actions.
 
 ```tsx
 import { ButtonGroup } from "@harjs/react-ui";
@@ -60,9 +103,13 @@ import { ButtonGroup } from "@harjs/react-ui";
 
 <Canvas of={ButtonStories.Group} />
 
-<h3>Action</h3>
+## Action
 
-The ButtonAction component is used to group multiple action buttons under a single dropdown menu (panel). When a trigger button, such as three dots (...), is pressed, it lists the buttons in the sub-panel. This component automatically passes shared properties to all buttons within it, providing a consistent user interface (UI) with less code.
+`ButtonAction` groups multiple related actions behind a single trigger, such as a "more
+options" (•••) button, listing the available actions in a dropdown panel when pressed. This
+is useful for keeping the interface clean when there are several possible actions for an
+item but only one or two should be shown by default. Like `ButtonGroup`, shared properties
+are automatically passed down to all buttons within it for a consistent UI with less code.
 
 ```tsx
 import { ButtonAction } from "@harjs/react-ui";
@@ -70,12 +117,12 @@ import { ButtonAction } from "@harjs/react-ui";
 
 <Canvas of={ButtonStories.Action} />
 
-<h3>Interactive Preview</h3>
+---
 
-Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+## All Props (API Reference)
 
-<Canvas of={ButtonStories.Editor} />
+The table below lists all the props supported by the `Button` component, along with their
+types and default values. For detailed type definitions, see the `@harjs/react-ui/types`
+package.
 
-When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
-
-<Controls />
+<ArgTypes of={ButtonStories.Editor} />

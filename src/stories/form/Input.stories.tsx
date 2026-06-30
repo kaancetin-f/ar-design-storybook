@@ -1,20 +1,22 @@
+import { COLOR_OPTIONS, RADIUS_OPTIONS, SIZE_OPTIONS, VARIANT_OPTIONS } from "@/infrustructure/shared/Array";
 import ICON_MAP from "@/infrustructure/shared/IconMap";
-import { Grid, Input } from "@harjs/react-ui";
-import type { BorderRadiuses } from "@harjs/react-ui/types";
-
-type StoryProps = React.ComponentProps<typeof Input> & {
-  borderRadius?: BorderRadiuses;
-  icon: any;
-  iconElement: keyof ReturnType<typeof ICON_MAP>;
-  iconPosition: "start" | "end";
-  validationText?: string;
-  validationScrollTo?: string;
-};
-
+import { Button, Grid, Input, Select } from "@harjs/react-ui";
+import { Option, type BorderRadiuses } from "@harjs/react-ui/types";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
-const { Row, Column, Box, Flex } = Grid;
+const { Row, Column, Flex } = Grid;
+
+type StoryProps = React.ComponentProps<typeof Input> & {
+  borderRadius?: BorderRadiuses;
+  icon?: any;
+  iconElement?: keyof ReturnType<typeof ICON_MAP>;
+  iconPosition?: "start" | "end";
+  addonBefore: React.ReactNode;
+  addonAfter: React.ReactNode;
+  validationText?: string;
+  validationScrollTo?: string;
+};
 
 const meta = {
   title: "FORM/Input",
@@ -24,197 +26,166 @@ const meta = {
 
 export default meta;
 
-export const Editor: StoryObj<StoryProps> = {
+type Story = StoryObj<StoryProps>;
+
+export const Editor: Story = {
   args: {
     variant: "outlined",
-    color: "blue",
+    color: "gray",
     size: "md",
     upperCase: false,
-    borderRadius: "sm",
+    borderRadius: "4",
     iconElement: "None",
     disabled: false,
   },
   argTypes: {
     border: { table: { disable: true } },
     icon: { table: { disable: true } },
+    addonBefore: {
+      name: "Addon Before",
+      description:
+        "A fixed element or component displayed before the input field. It is used to provide contextual information or visual cues prior to user input.",
+      table: {
+        category: "Addon",
+        type: { summary: "string | React.JSX.Element" },
+        defaultValue: { summary: "null" },
+      },
+    },
+    addonAfter: {
+      name: "Addon After",
+      description:
+        "A fixed element or component displayed after the input field. It is used to display supplementary information, actions, or unit indicators related to the input.",
+      table: {
+        category: "Addon",
+        type: { summary: "string | React.JSX.Element" },
+        defaultValue: { summary: "null" },
+      },
+    },
     validationText: { table: { disable: true } },
     validationScrollTo: { table: { disable: true } },
   },
-  render: ({ ...args }) => {
-    return <Input {...args} color="blue" border={{ radius: args.borderRadius as any }} />;
+  render: ({ borderRadius, ...args }) => {
+    return <Input {...args} border={{ radius: borderRadius as any }} />;
   },
 };
 
-export const Variant: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
+export const Variant: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     color: "gray",
-    borderRadius: "sm",
+    borderRadius: "4",
   },
-  render: ({ ...args }) => {
-    return (
-      <Flex flexDirection="row" gap={"15px"}>
-        <Input variant="filled" {...args} placeholder="Filled" />
-        <Input variant="outlined" {...args} placeholder="Outlined" />
-        <Input variant="dashed" {...args} placeholder="Dashed" />
-        <Input variant="surface-borderless" {...args} placeholder="Surface Borderless" />
-        <Input variant="borderless" {...args} placeholder="Borderless" />
-      </Flex>
-    );
-  },
+  render: (args) => (
+    <Flex flexDirection="row" gap="15px">
+      <Input {...args} variant="filled" placeholder="Filled" />
+      <Input {...args} variant="outlined" placeholder="Outlined" />
+      <Input {...args} variant="dashed" placeholder="Dashed" />
+      <Input {...args} variant="surface-borderless" placeholder="Surface Borderless" />
+      <Input {...args} variant="borderless" placeholder="Borderless" />
+    </Flex>
+  ),
 };
 
-export const Color: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
+export const Color: Story = {
+  parameters: { controls: { disable: true } },
   args: { width: 65, placeholder: "..." },
-  render: ({ ...args }) => {
-    const colors = [
-      "blue",
-      "purple",
-      "pink",
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "teal",
-      "cyan",
-      "gray",
-      "light",
-    ] as const;
-
-    const variants = ["filled", "surface-borderless", "outlined", "dashed"] as const;
-
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        {variants.map((variant) => (
-          <div key={variant} style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-            {colors.map((color) => (
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <Input {...args} key={`${variant}-${color}`} variant={variant} color={color} />
-                <Input {...args} key={`${variant}-${color}`} variant={variant} color={color} value={"HarJS"} />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    );
-  },
+  render: (args) => (
+    <Flex flexDirection="column" gap="16px">
+      {VARIANT_OPTIONS.map((variant) => (
+        <Flex key={variant} flexDirection="row" alignItems="center" gap="12px" flexWrap="wrap">
+          {COLOR_OPTIONS.map((color) => (
+            <Flex key={`${variant}-${color}`} flexDirection="column" gap="4px">
+              <Input {...args} variant={variant} color={color} />
+              <Input {...args} variant={variant} color={color} value="HarJS" />
+            </Flex>
+          ))}
+        </Flex>
+      ))}
+    </Flex>
+  ),
 };
 
-export const Disabled: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
+export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     placeholder: "Disabled",
     disabled: true,
   },
-  render: ({ ...args }) => {
-    return (
-      <Flex flexDirection="column" gap={"15px"}>
-        <Input {...args} />
-        <Input {...args} value={"HarJS"} />
-      </Flex>
-    );
-  },
+  render: (args) => (
+    <Flex flexDirection="column" gap="15px">
+      <Input {...args} />
+      <Input {...args} value="HarJS" />
+    </Flex>
+  ),
 };
 
-export const Radius: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  args: {
-    color: "gray",
-  },
-  render: ({ ...args }) => {
-    return (
-      <Flex flexDirection="column" gap={"15px"}>
-        <Input border={{ radius: "none" }} {...args} placeholder="Radius none" />
-        <Input border={{ radius: "sm" }} {...args} placeholder="Radius sm" />
-        <Input border={{ radius: "lg" }} {...args} placeholder="Radius lg" />
-        <Input border={{ radius: "xl" }} {...args} placeholder="Radius xl" />
-        <Input border={{ radius: "xxl" }} {...args} placeholder="Radius xxl" />
-        <Input border={{ radius: "pill" }} {...args} placeholder="Radius pill" />
-      </Flex>
-    );
-  },
+export const Radius: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "gray" },
+  render: (args) => (
+    <Flex flexDirection="column" gap="15px">
+      {RADIUS_OPTIONS.map((radius) => (
+        <Input key={radius} {...args} border={{ radius }} placeholder={`Radius ${radius}`} />
+      ))}
+    </Flex>
+  ),
 };
 
-export const Size: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  args: {
-    color: "gray",
-  },
-  render: ({ ...args }) => {
-    const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
-
-    return (
-      <Flex flexDirection="column" gap={"15px"}>
-        {sizes.map((size) => (
-          <Input size={size} {...args} placeholder={`Input ${size}`} />
-        ))}
-      </Flex>
-    );
-  },
+export const Size: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "gray" },
+  render: (args) => (
+    <Flex flexDirection="column" gap="15px">
+      {SIZE_OPTIONS.map((size) => (
+        <Input key={size} {...args} size={size} placeholder={`Input ${size}`} />
+      ))}
+    </Flex>
+  ),
 };
 
-const userCircle = ICON_MAP("var(--gray-500)").UserCircle;
-const at = ICON_MAP("var(--gray-500)").At;
-const password = ICON_MAP("var(--gray-500)").Password;
-const eye = ICON_MAP("var(--gray-500)").Eye;
-const eyeClosed = ICON_MAP("var(--gray-500)").EyeClosed;
-export const WithIcon: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
+export const Validation: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "gray", validation: { text: "Value is required." } },
+  render: (args) => <Input {...args} placeholder="Validation Input" />,
+};
+
+const userCircleIcon = ICON_MAP("var(--gray-500)").UserCircle;
+const atIcon = ICON_MAP("var(--gray-500)").At;
+const passwordIcon = ICON_MAP("var(--gray-500)").Password;
+const eyeIcon = ICON_MAP("var(--gray-500)").Eye;
+const eyeClosedIcon = ICON_MAP("var(--gray-500)").EyeClosed;
+
+export const WithIcon: Story = {
+  parameters: { controls: { disable: true } },
   args: {
     name: "With Icon",
     color: "gray",
   },
-  render: ({ ...args }) => {
-    // states
-    const [isShow, setIsShow] = useState<boolean>(false);
+  render: (args) => {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     return (
       <>
         <Row>
           <Column size={6}>
             <Input {...args} placeholder="Username">
-              <Input.Icon position="start">{userCircle}</Input.Icon>
+              <Input.Icon position="start">{userCircleIcon}</Input.Icon>
             </Input>
           </Column>
 
           <Column size={6}>
             <Input {...args} placeholder="E-Mail">
-              <Input.Icon position="start">{at}</Input.Icon>
+              <Input.Icon position="start">{atIcon}</Input.Icon>
             </Input>
           </Column>
         </Row>
 
         <Row>
           <Column size={12}>
-            <Input {...args} type={isShow ? "text" : "password"} placeholder="Password">
-              <Input.Icon position="start">{password}</Input.Icon>
-              <Input.Icon position="end" onClick={() => setIsShow((prev) => !prev)}>
-                {isShow ? eye : eyeClosed}
+            <Input {...args} type={isPasswordVisible ? "text" : "password"} placeholder="Password">
+              <Input.Icon position="start">{passwordIcon}</Input.Icon>
+              <Input.Icon position="end" onClick={() => setIsPasswordVisible((prev) => !prev)}>
+                {isPasswordVisible ? eyeIcon : eyeClosedIcon}
               </Input.Icon>
             </Input>
           </Column>
@@ -224,44 +195,103 @@ export const WithIcon: StoryObj<StoryProps> = {
   },
 };
 
-export const Addons: StoryObj<StoryProps> = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  args: {
-    color: "gray",
-  },
-  render: ({ ...args }) => {
+export const Addons: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "gray" },
+  render: (args) => (
+    <Flex flexDirection="column" gap="15px">
+      <Input {...args} placeholder="Web site address">
+        <Input.AddonBefore>https://</Input.AddonBefore>
+        <Input.AddonAfter>.design</Input.AddonAfter>
+      </Input>
+
+      <Input {...args} placeholder="Username">
+        <Input.AddonBefore>@</Input.AddonBefore>
+      </Input>
+
+      <span>Your vanity URL</span>
+      <Input {...args} placeholder="...">
+        <Input.AddonBefore>https://example.com/users/</Input.AddonBefore>
+      </Input>
+    </Flex>
+  ),
+};
+
+export const MultipleAddons: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "gray" },
+  render: (args) => {
+    const [currency, setCurrency] = useState<string | null>("tr-TR");
+    const [currencies] = useState<Option[]>([
+      { value: "tr-TR", text: "₺" },
+      { value: "en-US", text: "$" },
+    ]);
+
     return (
-      <Flex flexDirection="column" gap={"15px"}>
-        <Input {...args} placeholder="Web site address">
-          <Input.AddonBefore>https://</Input.AddonBefore>
-          <Input.AddonAfter>.design</Input.AddonAfter>
-        </Input>
-
-        <Input {...args} placeholder="Username">
-          <Input.AddonBefore>@</Input.AddonBefore>
-        </Input>
-
-        <span>Your vanity URL</span>
-        <Input {...args}>
-          <Input.AddonBefore>https://example.com/users/</Input.AddonBefore>
-        </Input>
-
-        <span>Multiple Addon</span>
-
+      <Flex flexDirection="column" gap="15px">
         <Input {...args}>
           <Input.AddonBefore>₺</Input.AddonBefore>
           <Input.AddonBefore>0.00</Input.AddonBefore>
         </Input>
 
         <Input {...args}>
+          <Input.AddonAfter>
+            <Input placeholder="..." />
+          </Input.AddonAfter>
           <Input.AddonAfter>₺</Input.AddonAfter>
           <Input.AddonAfter>0.00</Input.AddonAfter>
         </Input>
+
+        <Input {...args}>
+          <Input.AddonAfter>{Intl.NumberFormat(currency ?? "tr-TR").format(0.01)}</Input.AddonAfter>
+          <Input.AddonAfter>
+            <Select
+              options={currencies}
+              value={currencies.find((x) => x.value === currency)}
+              onChange={(option) => setCurrency(option?.value as string)}
+              placeholder="Currency"
+            />
+          </Input.AddonAfter>
+        </Input>
+
+        <Input {...args}>
+          <Input.AddonAfter>
+            <Input placeholder="..." />
+          </Input.AddonAfter>
+          <Input.AddonAfter>
+            <Button color="blue">Send</Button>
+          </Input.AddonAfter>
+        </Input>
       </Flex>
+    );
+  },
+};
+
+export const Number: Story = {
+  parameters: { controls: { disable: true } },
+  args: { type: "number", color: "gray" },
+  render: (args) => {
+    return (
+      <Flex flexDirection="column" gap="15px">
+        <Input {...args} placeholder="Number" />
+        <Input.Decimal {...args} placeholder="Decimal" />
+        <Input.FormattedDecimal {...args} placeholder="Formatted Decimal" />
+      </Flex>
+    );
+  },
+};
+
+export const PhoneNumber: Story = {
+  parameters: { controls: { disable: true } },
+  args: { type: "number", color: "gray" },
+  render: (args) => {
+    return (
+      <Input.Phone
+        {...args}
+        options={[{ value: "90", text: "+(90)" }]}
+        values={{ value: "", option: "" }}
+        placeholder="Phone Number"
+      />
     );
   },
 };

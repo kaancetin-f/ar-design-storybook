@@ -1,3 +1,4 @@
+import { RADIUS_OPTIONS, SIZE_OPTIONS } from "@/infrustructure/shared/Array";
 import ICON_MAP from "@/infrustructure/shared/IconMap";
 import { Button, ButtonAction, ButtonGroup, Grid } from "@harjs/react-ui";
 import type { BorderRadiuses } from "@harjs/react-ui/types";
@@ -15,7 +16,7 @@ type StoryProps = React.ComponentProps<typeof Button> & {
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-const { Box } = Grid;
+const { Box, Flex } = Grid;
 
 const meta = {
   title: "FORM/Button",
@@ -39,7 +40,7 @@ export const Editor: StoryObj<StoryProps> = {
     size: "md",
     upperCase: false,
     fullWidth: false,
-    borderRadius: "sm",
+    borderRadius: "4",
     iconElement: "None",
     disabled: false,
   },
@@ -86,37 +87,6 @@ export const Editor: StoryObj<StoryProps> = {
         category: "Ikon",
         type: { summary: "string" },
         defaultValue: { summary: "Square" },
-      },
-    },
-    iconElement: {
-      name: "Icon",
-      control: {
-        type: "select",
-      },
-      options: Object.keys(ICON_MAP),
-      description: "Selects the sample `icon component` to be placed inside the button.",
-      table: {
-        category: "Ikon",
-        type: { summary: "string" },
-        defaultValue: { summary: "None" },
-      },
-    },
-    iconPosition: {
-      name: "Position",
-      control: {
-        type: "inline-radio",
-        labels: {
-          start: "Start",
-          end: "End",
-        },
-      },
-      options: ["start", "end"],
-      description:
-        "Determines the alignment direction `left / right` of the selected icon relative to the button text.",
-      table: {
-        category: "Ikon",
-        type: { summary: "string" },
-        defaultValue: { summary: "Start" },
       },
     },
     // #endregion
@@ -227,20 +197,7 @@ export const Color: StoryObj<StoryProps> = {
     },
   },
   render: ({ ...args }) => {
-    const colors = [
-      "blue",
-      "purple",
-      "pink",
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "teal",
-      "cyan",
-      "gray",
-      "light",
-    ] as const;
-
+    const colors = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray"] as const;
     const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed", "borderless"] as const;
 
     return (
@@ -324,26 +281,13 @@ export const Radius: StoryObj<StoryProps> = {
   },
   render: ({ ...args }) => {
     return (
-      <>
-        <Button border={{ radius: "none" }} {...args}>
-          Radius none
-        </Button>
-        <Button border={{ radius: "sm" }} {...args}>
-          Radius sm
-        </Button>
-        <Button border={{ radius: "lg" }} {...args}>
-          Radius lg
-        </Button>
-        <Button border={{ radius: "xl" }} {...args}>
-          Radius xl
-        </Button>
-        <Button border={{ radius: "xxl" }} {...args}>
-          Radius xxl
-        </Button>
-        <Button border={{ radius: "pill" }} {...args}>
-          Radius pill
-        </Button>
-      </>
+      <Flex flexDirection="column" gap={"15px"}>
+        {RADIUS_OPTIONS.map((radius) => (
+          <Button key={radius} {...args} border={{ radius }}>
+            Radius {radius}
+          </Button>
+        ))}
+      </Flex>
     );
   },
 };
@@ -358,11 +302,9 @@ export const Size: StoryObj<StoryProps> = {
     color: "blue",
   },
   render: ({ ...args }) => {
-    const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
-
     return (
       <>
-        {sizes.map((size) => (
+        {SIZE_OPTIONS.map((size) => (
           <Button variant="filled" size={size} {...args}>
             Button {size}
           </Button>
@@ -386,10 +328,10 @@ export const Size: StoryObj<StoryProps> = {
   },
 };
 
-const check = ICON_MAP("var(--white)").Check;
-const paperPlaneRight = ICON_MAP("var(--white)").PaperPlaneRight;
-const search = ICON_MAP("var(--white)").Search;
-const settings = ICON_MAP("var(--white)").Settings;
+const check = ICON_MAP("var(--white-pure)").Check;
+const paperPlaneRight = ICON_MAP("var(--white-pure)").PaperPlaneRight;
+const search = ICON_MAP("var(--white-pure)").Search;
+const settings = ICON_MAP("var(--white-pure)").Settings;
 export const WithIcon: StoryObj<StoryProps> = {
   parameters: {
     controls: {
@@ -445,9 +387,9 @@ export const Group: StoryObj<StoryProps> = {
   },
 };
 
-const caretLineDown = ICON_MAP("var(--white)").CaretLineDown;
-const notePencil = ICON_MAP("var(--white)").NotePencil;
-const trash = ICON_MAP("var(--white)").Trash;
+const caretLineDown = ICON_MAP("var(--white-pure)").CaretLineDown;
+const notePencil = ICON_MAP("var(--orange-500)").NotePencil;
+const trash = ICON_MAP("var(--red-500)").Trash;
 export const Action: StoryObj<StoryProps> = {
   name: "Button Action",
   parameters: {

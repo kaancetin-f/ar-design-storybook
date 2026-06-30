@@ -4,6 +4,8 @@ import { useState } from "react";
 
 type StoryProps = React.ComponentProps<typeof Radio> & {
   borderRadius?: string;
+  iconElement?: any;
+  iconPosition?: any;
   validationText?: string;
   validationScrollTo?: boolean;
 };
@@ -27,6 +29,8 @@ export default meta;
 export const Editor: StoryObj<StoryProps> = {
   argTypes: {
     borderRadius: { table: { disable: true } },
+    iconElement: { table: { disable: true } },
+    iconPosition: { table: { disable: true } },
     label: { name: "Label" },
   },
   args: {
@@ -76,6 +80,8 @@ export const Variant: StoryObj<StoryProps> = {
   },
 };
 
+const colors = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray"] as const;
+const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed"] as const;
 export const Color: StoryObj<StoryProps> = {
   parameters: {
     controls: {
@@ -83,22 +89,6 @@ export const Color: StoryObj<StoryProps> = {
     },
   },
   render: ({ ...args }) => {
-    const colors = [
-      "blue",
-      "purple",
-      "pink",
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "teal",
-      "cyan",
-      "gray",
-      "light",
-    ] as const;
-
-    const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed"] as const;
-
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {variants.map((variant) => (
@@ -148,7 +138,7 @@ export const Size: StoryObj<StoryProps> = {
     checked: true,
   },
   render: ({ ...args }) => {
-    const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
+    const sizes = ["xs", "sm", "md"] as const;
 
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>

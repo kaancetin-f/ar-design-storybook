@@ -1,4 +1,4 @@
-import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, Story, Controls, ArgTypes, Description, Title, Subtitle } from "@storybook/addon-docs/blocks";
 
 import * as CheckboxStories from "./Checkbox.stories";
 
@@ -6,62 +6,88 @@ import * as CheckboxStories from "./Checkbox.stories";
 
 <Title />
 
-The Checkbox component is an interactive element used to select one or more options from a limited set. Use checkboxes to allow users to toggle independent choices or agree to single statements.
+`Checkbox` is the core form component used to let users select one or more independent
+options from a list, or toggle a single binary choice (e.g. "I agree to the terms and
+conditions"). It comes with multiple color, variant, size, and border radius options, and
+can be grouped together with `CheckboxGroup` to manage a related set of choices.
 
-### Key Features
-
-- **Multiple Selection:** Enables users to select multiple independent options from a list.
-- **Binary State:** Ideal for single binary choices, such as "I agree to the terms and conditions."
-- **Instant Feedback:** Can be used in filtering systems to update data dynamically upon selection.
-
-> **Note:** Use Checkboxes when multiple options can be selected simultaneously. If the user must choose only _one_ option from a list, use a **Radio Button** instead.
+> **Note:** Use `Checkbox` when multiple options can be selected at the same time. If the
+> user must choose only _one_ option from a list, use a **Radio Button** instead.
 
 ```typescript
 import { Checkbox, CheckboxGroup } from "@harjs/react-ui";
 ```
 
-<h3>Variant</h3>
+> **Note:** All examples below are live — you can use Storybook's Controls panel to change
+> props and instantly test the component's behavior.
 
-Defines the visual style and structure of the checkbox (e.g., Filled, Outlined). Choose the appropriate variant to match your application's design language and layout contrast.
+---
+
+## Variant
+
+`Checkbox` offers several visual variants, each carrying a different level of emphasis.
+Variants with a stronger fill or border stand out more clearly and work well when the
+choice itself carries weight, while lighter, more outlined options blend into the
+surrounding interface and suit denser lists where many checkboxes appear together. For
+consistency in your design language, it's recommended to use a single variant within the
+same form.
 
 <Canvas of={CheckboxStories.Variant} />
 
-<h3>Color</h3>
+## Color
 
-Specifies the semantic context or brand identity of the checkbox. Use different colors to convey specific meanings, such as status indicators or highlighted choices.
+The component supports a wide range of color options so it can align with your brand
+palette. Color here isn't just decorative — it can be used to convey meaning, such as
+tying a checkbox's color to the category it represents in a filtering system, or to a
+status it controls. Using semantic colors consistently across the project helps users
+build a reliable mental model of what each color means.
 
 <Canvas of={CheckboxStories.Color} />
 
-<h3>Disabled</h3>
+## Disabled
 
-Prevents any user interaction while visually indicating that the checkbox is currently inactive. This is useful for conditional forms where certain choices depend on other fields.
+Prevents any user interaction while visually indicating that the checkbox is currently
+inactive — the field is dimmed and the cursor switches to `not-allowed`. This is useful for
+conditional forms where a choice depends on another field being filled in first, or for
+options that are temporarily unavailable. For accessibility, `disabled` checkboxes are also
+automatically skipped by screen readers.
 
 <Canvas of={CheckboxStories.Disabled} />
 
-<h3>Radius</h3>
+## Border Radius
 
-Controls the border-radius of the checkbox frame. Allows you to switch between sharp corners, subtle rounded edges, or fully circular states to align with your design system.
+Corner rounding can be customized across a wide range of options and is an important visual
+variable that determines the overall "hard/soft" feel of your design system. Sharper,
+square corners tend to read as more structured and align with denser, data-heavy
+interfaces, while fully rounded corners feel softer and more approachable. For consistency
+across the project, it's generally recommended to use a single border radius value across
+all form controls.
 
 <Canvas of={CheckboxStories.Radius} />
 
-<h3>Size</h3>
+## Size
 
-Adjusts the scaling of the checkbox icon and its touch-target area. Provides options ranging from compact layouts (`xs`) to high-visibility configurations (`xxl`).
+The component offers multiple size options that can be chosen based on context. Smaller
+sizes are preferred for compact, dense lists where many options are shown at once, while
+larger sizes improve touch-target area and visibility on mobile or in forms where the
+choice needs to stand out.
 
 <Canvas of={CheckboxStories.Size} />
 
-<h3>Validation</h3>
+## Validation
 
-Displays feedback states such as error messages or success markers. When a validation rule fails, the component visually adapts to draw the user's attention to the required correction.
+Displays feedback states such as error or success markers. When a validation rule fails —
+for example, a required agreement checkbox left unchecked — the component visually adapts
+to draw the user's attention to the correction that's needed before the form can proceed.
 
 <Canvas of={CheckboxStories.Validation} />
 
-<h3>Interactive Preview</h3>
+---
 
-Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+## All Props (API Reference)
 
-<Canvas of={CheckboxStories.Editor} />
+The table below lists all the props supported by the `Checkbox` component, along with their
+types and default values. For detailed type definitions, see the `@harjs/react-ui/types`
+package.
 
-When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
-
-<Controls />
+<ArgTypes of={CheckboxStories.Editor} />

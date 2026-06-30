@@ -1,4 +1,4 @@
-import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, Story, Controls, ArgTypes, Description, Title, Subtitle } from "@storybook/addon-docs/blocks";
 
 import * as InputStories from "./Input.stories";
 
@@ -6,47 +6,127 @@ import * as InputStories from "./Input.stories";
 
 <Title />
 
-The Input component is a form element used to collect user-entered data.
-Use inputs to allow users to enter, edit, and submit text or other values.
+`Input` is the core form component used to capture user input such as text, numbers, and
+passwords in forms. It comes with multiple color, variant, size, and border radius options;
+it also supports icons and addons (prefix/suffix) so you can build more complex input fields
+(e.g. a `https://` prefix, a currency symbol, a select-box addon).
 
-```typescript
-import { Input } from "@harjs/react-ui";
-```
+> **Note:** All examples below are live — you can use Storybook's Controls panel to change
+> props and instantly test the component's behavior.
 
-<h3>Variant</h3>
+---
+
+## Variant
+
+`Input` offers several visual variants, each carrying a different level of emphasis.
+Variants with a stronger border stand out more clearly in standard forms, while softer,
+borderless options blend into the surrounding interface and work well for embedded or
+low-emphasis contexts. A dashed-style variant can also be useful for more specific cases,
+such as signaling that a field is still a draft or hasn't been filled in yet. For
+consistency in your design language, it's recommended to use a single variant within the
+same form.
 
 <Canvas of={InputStories.Variant} />
 
-<h3>Color</h3>
+## Color
 
-<Canvas of={InputStories.Color} />
+The component supports a wide range of color options so it can align with your brand
+palette. The table below shows a side-by-side comparison of each color across the core
+variants, both empty and filled with a value. This matrix should be used as a reference
+when choosing the correct color, especially for validation states such as error, warning,
+and success. Color isn't just a stylistic choice here — it's also a way to give the user
+immediate feedback, so it's important to use semantic colors consistently across the
+project.
 
-<h3>Disabled</h3>
+## Disabled
+
+When the `disabled` prop is set to `true`, the input field is closed off to user interaction,
+visually dimmed, and the cursor switches to `not-allowed`. This state is used for read-only
+data, permission restrictions, or form fields waiting for a previous step to be completed.
+For accessibility, `disabled` fields are also automatically skipped by screen readers.
 
 <Canvas of={InputStories.Disabled} />
 
-<h3>Radius</h3>
+## Border Radius
+
+Corner rounding can be customized across a wide range of options and is an important visual
+variable that determines the overall "hard/soft" feel of your design system. Sharper,
+square corners tend to read as more structured and corporate, while fully rounded (pill-
+shaped) corners feel friendlier and more modern. For consistency across the project, it's
+generally recommended to use a single border radius value across all forms.
 
 <Canvas of={InputStories.Radius} />
 
-<h3>Size</h3>
+## Size
+
+The component offers multiple height options that can be chosen based on context. Smaller
+sizes are preferred for compact contexts like in-table editing, mid-range sizes serve as
+the default for standard forms, and larger sizes are used on mobile or for input fields
+that need to stand out and draw attention.
 
 <Canvas of={InputStories.Size} />
 
-<h3>With Icon</h3>
+## Validation
+
+Displays validation feedback such as error or success states. Useful for required selections or form validation scenarios where a choice must be made.
+
+<Canvas of={InputStories.Validation} />
+
+## With Icon
+
+The `Input.Icon` subcomponent lets you place an icon at the start or end of the input field.
+This feature is used to give a visual hint in fields like username or email, or to add a
+**clickable** action (show/hide) as seen in password fields. In the example below, clicking
+the eye icon in the password field toggles the `type` prop between `password` and `text`,
+controlling the visibility of the password.
 
 <Canvas of={InputStories.WithIcon} />
 
-<h3>Addons</h3>
+## Addons
+
+`Input.AddonBefore` and `Input.AddonAfter` let you attach fixed text, an icon, or another
+form component (such as a `Select` or a second `Input`) to the start or end of the input
+field. This structure is used to build website prefixes (`https://`), currency symbols,
+units of measurement, or composite input fields (e.g. amount + currency selector). Multiple
+addons can be defined on the same side (`Before` or `After`); the component automatically
+marks them with `first`, `middle`, and `last` classes to seamlessly merge their borders and
+border radii.
 
 <Canvas of={InputStories.Addons} />
 
-<h3>Interactive Preview</h3>
+## Multiple Addons
 
-Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+More than one addon can be stacked on the same side of the input at once — for example,
+combining an icon with a short label, or chaining a unit selector after a currency symbol.
+The component handles the spacing and border merging automatically, so stacked addons read
+as a single, cohesive control rather than a row of separate elements.
 
-<Canvas of={InputStories.Editor} />
+<Canvas of={InputStories.MultipleAddons} />
 
-When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
+## Number
 
-<Controls />
+A numeric variant of the input is available for fields that should only accept numbers,
+such as quantities, prices, or measurements. It typically pairs well with increment/decrement
+controls or addons indicating a unit, and it helps prevent invalid characters from being
+entered in the first place rather than relying solely on validation after submission.
+
+<Canvas of={InputStories.Number} />
+
+## Phone Number
+
+A dedicated phone number variant is available for capturing telephone numbers, often paired
+with a country or dial-code selector as a leading addon. This is useful for international
+forms where the expected format varies by region, and it can help guide the user toward
+entering the number in a consistent, parseable structure.
+
+<Canvas of={InputStories.PhoneNumber} />
+
+---
+
+## All Props (API Reference)
+
+The table below lists all the props supported by the `Input` component, along with their
+types and default values. For detailed type definitions, see the `@harjs/react-ui/types`
+package.
+
+<ArgTypes of={InputStories.Editor} />

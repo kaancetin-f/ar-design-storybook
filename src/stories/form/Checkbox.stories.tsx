@@ -5,6 +5,8 @@ import { useState } from "react";
 
 type StoryProps = React.ComponentProps<typeof Checkbox> & {
   borderRadius?: BorderRadiuses;
+  iconElement?: any;
+  iconPosition?: any;
   validationText?: string;
   validationScrollTo?: boolean;
 };
@@ -28,6 +30,8 @@ export default meta;
 export const Editor: StoryObj<StoryProps> = {
   argTypes: {
     border: { table: { disable: true } },
+    iconElement: { table: { disable: true } },
+    iconPosition: { table: { disable: true } },
     label: { name: "Label" },
   },
   args: {
@@ -35,7 +39,7 @@ export const Editor: StoryObj<StoryProps> = {
     variant: "filled",
     color: "green",
     size: "sm",
-    borderRadius: "sm",
+    borderRadius: "4",
     upperCase: false,
     disabled: false,
     validationText: "",
@@ -46,7 +50,7 @@ export const Editor: StoryObj<StoryProps> = {
     return (
       <Checkbox
         {...args}
-        border={{ radius: args.borderRadius ?? "sm" }}
+        border={{ radius: args.borderRadius ?? "4" }}
         validation={{ text: args.validationText, scrollTo: args.validationScrollTo }}
       />
     );
@@ -84,6 +88,8 @@ export const Variant: StoryObj<StoryProps> = {
   },
 };
 
+const colors = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray"] as const;
+const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed"] as const;
 export const Color: StoryObj<StoryProps> = {
   parameters: {
     controls: {
@@ -91,22 +97,6 @@ export const Color: StoryObj<StoryProps> = {
     },
   },
   render: ({ ...args }) => {
-    const colors = [
-      "blue",
-      "purple",
-      "pink",
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "teal",
-      "cyan",
-      "gray",
-      "light",
-    ] as const;
-
-    const variants = ["filled", "surface", "surface-borderless", "outlined", "dashed"] as const;
-
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {variants.map((variant) => (
@@ -144,6 +134,7 @@ export const Disabled: StoryObj<StoryProps> = {
   },
 };
 
+const RADIUS_OPTIONS = ["0", "2", "4", "6", "8", "12", "16", "20", "40", "full"] as const;
 export const Radius: StoryObj<StoryProps> = {
   parameters: {
     controls: {
@@ -156,11 +147,9 @@ export const Radius: StoryObj<StoryProps> = {
     checked: true,
   },
   render: ({ ...args }) => {
-    const raduises = ["none", "sm", "lg", "xl", "xxl", "pill"] as const;
-
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        {raduises.map((radius) => (
+        {RADIUS_OPTIONS.map((radius) => (
           <Checkbox label="Checkbox" variant="filled" border={{ radius }} {...args} />
         ))}
       </div>
@@ -180,7 +169,7 @@ export const Size: StoryObj<StoryProps> = {
     checked: true,
   },
   render: ({ ...args }) => {
-    const sizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
+    const sizes = ["xs", "sm", "md"] as const;
 
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>

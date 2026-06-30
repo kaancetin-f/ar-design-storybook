@@ -1,4 +1,4 @@
-import { Title, Canvas, Meta, Stories, Controls } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, Story, Controls, ArgTypes, Description, Title, Subtitle } from "@storybook/addon-docs/blocks";
 
 import * as RadioStories from "./Radio.stories";
 
@@ -6,56 +6,76 @@ import * as RadioStories from "./Radio.stories";
 
 <Title />
 
-The Radio component is an interactive element used when users must select a single option from a predefined set. Radio buttons ensure that only one choice can be active at a time within the same group.
+`Radio` is the core form component used when users must select a single option from a
+predefined set. It ensures that only one choice can be active at a time within the same
+group, automatically deselecting the previous option when a new one is chosen. It comes
+with multiple color, variant, and size options, and can be grouped together with
+`RadioGroup` to manage a related set of mutually exclusive choices.
 
-### Key Features
-
-- **Single Selection:** Allows users to select only one option from a group.
-- **Mutually Exclusive Choices:** Automatically deselects the previously selected option when a new one is chosen.
-- **Clear Decision Making:** Ideal for forms and settings where exactly one option must be selected.
-
-> **Note:** Use Radio Buttons when users must choose **only one** option from a list. If multiple options can be selected independently, use a **Checkbox** instead.
+> **Note:** Use `Radio` when the user must choose **only one** option from a list. If
+> multiple options can be selected independently, use a **Checkbox** instead.
 
 ```typescript
 import { Radio, RadioGroup } from "@harjs/react-ui";
 ```
 
-<h3>Variant</h3>
+> **Note:** All examples below are live — you can use Storybook's Controls panel to change
+> props and instantly test the component's behavior.
 
-Defines the visual style and structure of the radio button (e.g., Filled, Outlined). Choose the appropriate variant to match your application's design language and maintain visual consistency.
+---
+
+## Variant
+
+`Radio` offers several visual variants, each carrying a different level of emphasis.
+Variants with a stronger fill or border stand out more clearly and help draw attention to
+the selected option, while lighter, more outlined options blend into the surrounding
+interface and suit denser lists where many options appear together. For consistency in
+your design language, it's recommended to use a single variant within the same form.
 
 <Canvas of={RadioStories.Variant} />
 
-<h3>Color</h3>
+## Color
 
-Specifies the semantic context or brand identity of the radio button. Different colors can be used to emphasize selections or align with your application's theme.
+The component supports a wide range of color options so it can align with your brand
+palette. Color can be used to emphasize the selected state more clearly or to tie a group
+of options to your application's broader theme. Using semantic colors consistently across
+the project helps users build a reliable mental model of what each color means.
 
 <Canvas of={RadioStories.Color} />
 
-<h3>Disabled</h3>
+## Disabled
 
-Prevents user interaction while clearly indicating that the radio option is unavailable. Useful for conditional forms or temporarily inaccessible choices.
+Prevents user interaction while clearly indicating that the option is currently
+unavailable — the field is dimmed and the cursor switches to `not-allowed`. This is useful
+for conditional forms where an option depends on another field being filled in first, or
+for choices that are temporarily inaccessible. For accessibility, `disabled` options are
+also automatically skipped by screen readers.
 
 <Canvas of={RadioStories.Disabled} />
 
-<h3>Size</h3>
+## Size
 
-Adjusts the size of the radio button and its interactive area. Choose from compact (`xs`) to larger (`xxl`) sizes depending on accessibility and layout requirements.
+The component offers multiple size options that can be chosen based on context. Smaller
+sizes are preferred for compact, dense lists where many options are shown at once, while
+larger sizes improve touch-target area and visibility on mobile or in forms where the
+decision needs to stand out.
 
 <Canvas of={RadioStories.Size} />
 
-<h3>Validation</h3>
+## Validation
 
-Displays validation feedback such as error or success states. Useful for required selections or form validation scenarios where a choice must be made.
+Displays validation feedback such as error or success states. This is useful for required
+selections, where the component visually adapts to draw the user's attention to the
+correction that's needed before the form can proceed.
 
 <Canvas of={RadioStories.Validation} />
 
-<h3>Interactive Preview</h3>
+---
 
-Changing any value in the properties table below will re-compile the Canvas preview in real-time.
+## All Props (API Reference)
 
-<Canvas of={RadioStories.Editor} />
+The table below lists all the props supported by the `Radio` component, along with their
+types and default values. For detailed type definitions, see the `@harjs/react-ui/types`
+package.
 
-When you change the value of any parameter in the table, the live preview area (Canvas) above is recompiled at the code level to display the immediate output.
-
-<Controls />
+<ArgTypes of={RadioStories.Editor} />

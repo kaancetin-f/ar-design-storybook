@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import ICON_MAP from "../src/infrustructure/shared/IconMap";
 
 const preview: Preview = {
   parameters: {
@@ -55,10 +56,9 @@ const preview: Preview = {
           teal: "Teal",
           cyan: "Cyan",
           gray: "Gray",
-          light: "Light",
         },
       },
-      options: ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray", "light"],
+      options: ["blue", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan", "gray"],
       description: "The design system applies one of the defined color palette themes to the button.",
       table: {
         type: { summary: "string" },
@@ -104,6 +104,40 @@ const preview: Preview = {
         defaultValue: { summary: "False" },
       },
     },
+
+    // #region Icon Settings
+    iconElement: {
+      name: "Icon",
+      control: {
+        type: "select",
+      },
+      options: ["a", "b"],
+      description: "Selects the sample `icon component` to be placed inside the button.",
+      table: {
+        category: "Icon",
+        type: { summary: "React.JSX.Element" },
+        defaultValue: { summary: "None" },
+      },
+    },
+    iconPosition: {
+      name: "Position",
+      control: {
+        type: "inline-radio",
+        labels: {
+          start: "Start",
+          end: "End",
+        },
+      },
+      options: ["start", "end"],
+      description: "Determines the alignment direction `start / end` of the selected icon relative to the button text.",
+      table: {
+        category: "Icon",
+        type: { summary: "string" },
+        defaultValue: { summary: "Start" },
+      },
+    },
+    // #endregion
+    // Icon Settings
 
     // #region Border Settings
     borderRadius: {
