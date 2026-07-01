@@ -221,6 +221,8 @@ export const MultipleAddons: Story = {
   parameters: { controls: { disable: true } },
   args: { color: "gray" },
   render: (args) => {
+    const [number, setNumber] = useState<number>(0);
+    const [decimal, setDecimal] = useState<number>(1);
     const [currency, setCurrency] = useState<string | null>("tr-TR");
     const [currencies] = useState<Option[]>([
       { value: "tr-TR", text: "₺" },
@@ -229,17 +231,14 @@ export const MultipleAddons: Story = {
 
     return (
       <Flex flexDirection="column" gap="15px">
-        <Input {...args}>
-          <Input.AddonBefore>₺</Input.AddonBefore>
-          <Input.AddonBefore>0.00</Input.AddonBefore>
-        </Input>
-
-        <Input {...args}>
+        <Input {...args} onChange={(e) => setNumber(Number(e.target.value))}>
           <Input.AddonAfter>
-            <Input placeholder="..." />
+            <Input onChange={(e) => setDecimal(Number(e.target.value))} placeholder="..." />
           </Input.AddonAfter>
           <Input.AddonAfter>₺</Input.AddonAfter>
-          <Input.AddonAfter>0.00</Input.AddonAfter>
+          <Input.AddonAfter>
+            {Intl.NumberFormat(currency ?? "tr-TR").format(Number(`${Number(number)}.${Number(decimal)}`))}
+          </Input.AddonAfter>
         </Input>
 
         <Input {...args}>
@@ -267,7 +266,7 @@ export const MultipleAddons: Story = {
   },
 };
 
-export const Number: Story = {
+export const InputNumber: Story = {
   parameters: { controls: { disable: true } },
   args: { type: "number", color: "gray" },
   render: (args) => {
@@ -294,4 +293,18 @@ export const PhoneNumber: Story = {
       />
     );
   },
+};
+
+export const Pin: Story = {
+  parameters: { controls: { disable: true } },
+  args: { color: "blue" },
+  render: (args) => (
+    <Input.Pin
+      {...args}
+      character={4}
+      onChange={(e) => {
+        // console.log(e.target.value);
+      }}
+    />
+  ),
 };

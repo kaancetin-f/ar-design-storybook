@@ -110,7 +110,7 @@ such as quantities, prices, or measurements. It typically pairs well with increm
 controls or addons indicating a unit, and it helps prevent invalid characters from being
 entered in the first place rather than relying solely on validation after submission.
 
-<Canvas of={InputStories.Number} />
+<Canvas of={InputStories.InputNumber} />
 
 ## Phone Number
 
@@ -120,6 +120,16 @@ forms where the expected format varies by region, and it can help guide the user
 entering the number in a consistent, parseable structure.
 
 <Canvas of={InputStories.PhoneNumber} />
+
+## Pin
+
+A dedicated PIN variant splits the input into individual character cells, commonly used for
+one-time passwords, verification codes, or short numeric PINs. Splitting the value into
+separate cells makes the expected length immediately clear to the user and typically
+advances focus to the next cell automatically as each character is entered, which speeds up
+completion compared to a single free-form field.
+
+<Canvas of={InputStories.Pin} />
 
 ---
 
